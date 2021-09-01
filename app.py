@@ -35,6 +35,7 @@ def home():
         f"/api/v1.0/start_date (in MM-DD-YYYY format)<br/>"
         f"/api/v1.0/start_date/end_date (in MM-DD-YYYY format)")
 
+#Precipitation Data
 @app.route("/api/v1.0/precipitation")
 def precipitation():
 
@@ -47,6 +48,7 @@ def precipitation():
   
     return jsonify(dt_data)
 
+#List of stations
 @app.route("/api/v1.0/stations")
 def stations():
     stns=session.query(station.station)
@@ -56,7 +58,7 @@ def stations():
     
     return jsonify(stations=stn_list)
 
-
+#Temperatures for most active station in last year
 @app.route("/api/v1.0/tobs")
 def temp():
     print("The most active station is USC00519281")
@@ -75,7 +77,7 @@ def temp():
         temp_list.append(t.tobs)
     return jsonify(temp=temp_list)
 
-
+#Maximum, average and minimum temperatures between start_date and end_date or after start_date
 @app.route("/api/v1.0/<start>")
 @app.route("/api/v1.0/<start>/<end>")
 def max_min_avg(start=None, end=None):
